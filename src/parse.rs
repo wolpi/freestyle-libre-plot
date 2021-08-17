@@ -12,7 +12,7 @@ pub fn parse_file(file :&File) -> Vec<FsLibreLine> {
     let reader = BufReader::new(file);
 
     let mut result = Vec::new();
-    let mut line_conter = 0;
+    let mut line_counter = 0;
     for line_result in reader.lines() {
         if line_result.is_err() {
             print!("could not read line: ");
@@ -20,17 +20,17 @@ pub fn parse_file(file :&File) -> Vec<FsLibreLine> {
             continue;
         }
         let line = line_result.unwrap();
-        let parse_result = parse_line(&line, &line_conter);
+        let parse_result = parse_line(&line, &line_counter);
         let line_error = parse_result.1;
         if !line_error {
             result.push(parse_result.0);
         }
-        line_conter += 1;
+        line_counter += 1;
     }
     return result;
 }
 
-fn parse_line(line :&String, line_conter :&u32) -> (FsLibreLine, bool) {
+fn parse_line(line :&String, line_counter :&u32) -> (FsLibreLine, bool) {
     //println!("{}", line);
     let mut fs_libre_line = FsLibreLine::new();
     let mut line_error = false;
@@ -167,7 +167,7 @@ fn parse_line(line :&String, line_conter :&u32) -> (FsLibreLine, bool) {
         }
     }
 
-    if line_error && *line_conter > 2 {
+    if line_error && *line_counter > 2 {
         println!("error parsing line: {}", err_msg);
         print!("    ");
         println!("{}", line);

@@ -1,5 +1,5 @@
 [package]
-name = "fslibre_print"
+name = "fslibre_plot"
 version = "0.1.0"
 authors = ["wolpi <wolpi.dev@web.de>"]
 edition = "2018"
